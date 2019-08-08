@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Static Template</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Heebo&display=swap"
+      rel="stylesheet"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@1.0.1/build/base-min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="grid">
+      <div class="grid__users">
+        <input type="checkbox" id="show-users" />
+        <label for="show-users" class="nav-btn"
+          ><span class="nav-btn__hamburger"></span
+        ></label>
+        <ul class="user-list">
+          <li data-author="me">
+            <img src="https://picsum.photos/200" alt="User picture" />
+            <span>Julien Riggs</span>
+          </li>
+          <li>
+            <img src="https://picsum.photos/200" alt="User picture" />
+            <span>Chspanrly Baird</span>
+          </li>
+          <li>
+            <img src="https://picsum.photos/200" alt="User picture" />
+            <span>Effie Rose</span>
+          </li>
+        </ul>
+      </div>
+      <div class="grid__messages">
+        <div class="message">
+          <div class="message__user-picture">
+            <img src="https://picsum.photos/200" alt="User picture" />
+          </div>
+          <div class="message__text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+            sapiente iste laudantium id eaque quibusdam tenetur in? Magnam culpa
+            iusto quasi excepturi ex sunt error vitae! Tempora magnam autem
+            deserunt!
+          </div>
+        </div>
+        <div class="message" data-author="me">
+          <div class="message__user-picture">
+            <img src="https://picsum.photos/200" alt="User picture" />
+          </div>
+          <div class="message__text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse culpa
+            nobis ea numquam, quibusdam a ipsum quae iusto neque assumenda eum
+            nesciunt quam voluptate id? Delectus ducimus impedit fugit.
+            Adipisci.
+          </div>
+        </div>
+        <div class="message">
+          <div class="message__user-picture">
+            <img src="https://picsum.photos/200" alt="User picture" />
+          </div>
+          <div class="message__text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
+            et officia, incidunt dolorum illum, a minus laboriosam, consequatur
+            commodi cum quidem. Dolor enim et illo similique in laudantium
+            accusamus. Architecto.
+          </div>
+        </div>
+        <div class="message">
+          <div class="message__user-picture">
+            <img src="https://picsum.photos/200" alt="User picture" />
+          </div>
+          <div class="message__text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
+            et officia, incidunt dolorum illum, a minus laboriosam, consequatur
+            commodi cum quidem. Dolor enim et illo similique in laudantium
+            accusamus. Architecto.
+          </div>
+        </div>
+        <div class="message" data-author="me">
+          <div class="message__user-picture">
+            <img src="https://picsum.photos/200" alt="User picture" />
+          </div>
+          <div class="message__text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse culpa
+            nobis ea numquam, quibusdam a ipsum quae iusto neque assumenda eum
+            nesciunt quam voluptate id? Delectus ducimus impedit fugit.
+            Adipisci.
+          </div>
+        </div>
+      </div>
+      <div class="grid__message-input">
+        <form>
+          <input
+            class="message-input"
+            type="text"
+            name="message-input"
+            id="message-input"
+            placeholder="Type your message here"
+          />
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    <script>
+      // Emular a entrada da mensagem.
+      document.addEventListener("DOMContentLoaded", () => {
+        const setAnimation = (node, timeout) => {
+          window.setTimeout(() => {
+            node.style.display = "flex";
+            node.classList.add("animated", "fadeIn");
+          }, timeout);
+        };
+
+        const elements = document.querySelectorAll(".message");
+
+        for (let i = 0; i < elements.length; i++) {
+          setAnimation(elements[i], 1000 * i);
+        }
+
+        // Ajuste do 'vh' para dispositivos mobile.
+        const calcInnerHeight = () => {
+          const vh = window.innerHeight * 0.01;
+          document.documentElement.style.setProperty("--vh", `${vh}px`);
+          console.log("calcInnerHeight", vh);
+        };
+
+        window.addEventListener("resize", () => {
+          const debounced = _.debounce(calcInnerHeight, 66);
+          debounced();
+        });
+
+        calcInnerHeight();
+      });
+    </script>
+  </body>
+</html>
